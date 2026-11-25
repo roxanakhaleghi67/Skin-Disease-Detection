@@ -1,5 +1,7 @@
 # Skin Disease Classifier
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+
 Image classifier for common skin conditions using a trained convolutional neural network (Keras/TensorFlow).
 
 ## Features
