@@ -1,41 +1,56 @@
-# Skin Disease Image Classifier
+# Skin Disease Classifier
 
-Classifies a photo of a skin condition with a trained convolutional neural network
-(TensorFlow/Keras).
+Image classifier for common skin conditions using a trained convolutional neural network (Keras/TensorFlow).
 
-## What it does
+## Features
 
-`skin_disease_detection.py` defines `SkinAnalyzer`: it resizes the image to 224×224,
-scales pixel values to `[0, 1]`, runs the model and returns the predicted class index
-and its confidence.
-
-```python
-from skin_disease_detection import SkinAnalyzer
-
-analyzer = SkinAnalyzer("skin_model.h5")
-class_id, confidence = analyzer.predict("rash.jpg")
-```
+- Loads a trained Keras model (`.h5`) from disk
+- Resizes input images to 224×224 and normalizes pixel values
+- Runs a forward pass and returns the predicted class index and confidence
+- Simple, class-based API (`SkinAnalyzer`)
 
 ## Requirements
 
-- Python 3.9+
-- `tensorflow`, `numpy` (see `requirements.txt`)
+- Python 3.8 or newer
+- `tensorflow` (2.x)
+- `numpy`
+- `pillow` (Pillow), used by the Keras image utilities
+
+## Installation
 
 ```bash
-python -m pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
-## Notes and limitations
+## Usage
 
-- A trained model file is **not** included; supply one trained on your own dataset.
-- Class indices are unlabelled here; keep the training label order alongside the model.
-- **Not a medical device.** Output is a research signal only and must not be used for
-  diagnosis or treatment decisions.
+The repository contains a single source module that defines `SkinAnalyzer`. Import it (here as `diagnose`) and call it with a model path and image path:
 
-## Status
+```python
+from diagnose import SkinAnalyzer
 
-Single-module prototype. Planned work: label mapping, a training notebook, and a small demo app.
+analyzer = SkinAnalyzer("skin_model.h5")
+class_id, confidence = analyzer.predict("rash.jpg")
+print(class_id, confidence)
+```
+
+> **Note:** A trained model file is **not** included in this repository. You must supply your own `SkinAnalyzer`-compatible model before predictions can be made. The class index maps to whatever label order your model was trained with.
+
+> **Disclaimer:** This project is provided for educational and research purposes only. It is **not** a medical device and must not be used to diagnose, treat, or rule out any condition. Always consult a qualified healthcare professional for medical advice.
+
+## Project Structure
+
+```text
+Skin-Disease-Detection/
+├── Skin Disease Detection.py   # SkinAnalyzer implementation
+├── requirements.txt
+└── README.md
+```
 
 ## License
 
-No license file is present yet. Until one is added, the default copyright applies.
+This project is released under the **MIT License**.
+
+## Author
+
+**Roxana Khaleghi**
